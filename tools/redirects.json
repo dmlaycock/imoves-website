@@ -1,0 +1,49 @@
+{
+ "stubs": {
+  "/choosing-an-ofsted-appropriate-pe-programme": "/teacher-knowledge-hub/choosing-an-ofsted-appropriate-pe-programme",
+  "/classroom-layout-for-active-learning": "/how-can-i-set-up-my-classroom-for-active-lessons-with-my-primary-school-class",
+  "/contact": "/contact-us",
+  "/creating-a-truly-active-school": "/cpd-creating-a-truly-active-primary-school",
+  "/dances": "/dance",
+  "/developing-the-whole-child-through-pe": "/subscriptions/cpd-developing-the-whole-child-through-pe",
+  "/how-can-i-engage-my-primary-class-in-dance": "/how-can-i-engage-my-primary-school-class-in-dance",
+  "/how-can-i-get-my-primary-school-children-to-find-the-beat-to-the-music": "/teacher-knowledge-hub/teaching-beat-and-phrase",
+  "/how-can-i-help-my-primary-school-class-share-their-worries-or-concerns": "/empower-your-primary-school-class-to-share-their-worries-and-concerns",
+  "/how-can-i-support-emotional-wellbeing-within-my-primary-school": "/empowering-emotional-wellbeing-in-primary-schools",
+  "/how-can-i-use-structured-play-to-get-my-primary-class-more-active": "/structured-active-play",
+  "/how-do-i-build-my-pe-curriculum": "/teacher-knowledge-hub/how-do-i-build-my-pe-curriculum",
+  "/how-to-teach-primary-school-dance-using-the-6-principles-of-dance": "/teacher-knowledge-hub/6-principles-of-dance",
+  "/how-to-use-standing-in-line-activities-in-a-primary-school": "/how-can-i-use-standing-in-line-activities-in-a-primary-school",
+  "/imovement-signup": "/",
+  "/imoves-active30": "/active-learning",
+  "/imoves-activeblasts": "/active-blasts",
+  "/imoves-activeschools": "/active-school",
+  "/imoves-dance": "/dance",
+  "/imoves-peplus": "/primary-pe",
+  "/page-builder/planning-the-perfect-sports-day": "/resource-hub/primary-pe-and-dance-lesson-planning/planning-the-perfect-sports-day",
+  "/peplus": "/primary-pe",
+  "/supporting-mental-wellbeing-in-a-post-covid-world": "/supporting-mental-wellbeing-in-primary-schools",
+  "/teaching-beat-and-phrase": "/teacher-knowledge-hub/teaching-beat-and-phrase",
+  "/three-outdated-approaches-to-pe": "/teacher-knowledge-hub/how-to-choose-the-right-pe-programme-for-your-primary-school",
+  "/what-key-terminology-used-when-creating-dance-performance-for-a-primary-school": "/dance-terminology",
+  "/what-should-i-look-for-in-a-pe-programme": "/teacher-knowledge-hub/what-should-i-look-for-in-a-pe-programme"
+ },
+ "dead": [
+  [
+   "/default/dist/ui/favicons/site.webmanifest",
+   "200-but-not-mirrored"
+  ],
+  [
+   "/page-not-found",
+   404
+  ],
+  [
+   "/signup",
+   "err"
+  ],
+  [
+   "/subscriptions",
+   "err"
+  ]
+ ]
+}
