@@ -143,9 +143,13 @@ def process_page(url):
                 continue
             u = urljoin(final, v)
             if tag == "meta":
-                # og:image etc.
+                # download the asset but keep social-sharing images absolute (scrapers need full URLs)
                 if is_same(u) and ASSET_EXT.search(urlparse(u).path):
-                    el[attr] = save_asset(u)
+                    local = save_asset(u)
+                    if (el.get("property") or el.get("name") or "") in ("og:image", "twitter:image"):
+                        el[attr] = SITE + local
+                    else:
+                        el[attr] = local
                 continue
             if not is_same(u):
                 continue
@@ -159,8 +163,9 @@ def process_page(url):
                     if pu not in pages_done and pu not in pages_todo:
                         pages_todo.append(pu)
                     pth = urlparse(pu).path
+                    q = urlparse(pu).query
                     frag = urlparse(v).fragment
-                    el[attr] = (pth if pth != "" else "/") + (("#" + frag) if frag else "")
+                    el[attr] = (pth if pth != "" else "/") + (("?" + q) if q else "") + (("#" + frag) if frag else "")
                 continue
             if ASSET_EXT.search(path) or tag in ("img", "script", "source", "video", "audio", "input", "use"):
                 el[attr] = save_asset(u)
