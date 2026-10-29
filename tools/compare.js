@@ -2,7 +2,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const paths = process.argv.slice(2);
-const LOCAL = 'http://127.0.0.1:8765';
+const LOCAL = process.env.LOCAL || 'http://127.0.0.1:8765';
 const LIVE = 'https://imoves.com';
 (async () => {
   const browser = await chromium.launch();
