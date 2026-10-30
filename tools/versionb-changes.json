@@ -803,5 +803,6 @@
    "no text heading on page; left without H1"
   ]
  },
- "sitemap": 132
+ "sitemap": 132,
+ "h1_note": "v0.9: tag retagging reverted (the stylesheet styles headings by tag inside .text-content, so retagging changed appearance). Heading outline is now expressed with role=\"heading\" aria-level=\"N\" on the original tags, which is invisible."
 }
