@@ -26,3 +26,7 @@ Static copy of the public imoves.com marketing site, taken 29 October 2026 from 
 - v0.5 - 29 Oct 2026 - pricing page laid out as on the platform: single column of full-width cards, bold titles, prices and buttons, no separate page banner
 - v0.6 - 29 Oct 2026 - audit fixes: og:image and twitter:image restored to absolute imoves.com URLs (social previews need them); three UTM-tagged internal links restored; mirror.py corrected for both. Full audit: 160 pages at 1366px and 390px, text identical on all, fonts identical on all, 248 of 320 renders pixel-identical, the other 70 differ only by the reviews block removed in v0.3. Audit tools added (compare-all.js, pixdiff.py, dom-audit.py).
 - v0.7 - 29 Oct 2026 - new link-preview images (og-share.png, twitter-share.png) at 1200x630 using the current im brand mark on purple, replacing the retired wordmark the live site still serves; og:image and twitter:image point at the copy's own address until cutover
+
+## Version A - locked 30 Oct 2026
+
+Version A is the exact copy at v0.7 (commit f664269). It is locked on branch `version-a` and served frozen at `/version-a/`. Its specification is `tools/SPEC-version-a.md`. Do not change Version A; all further work is Version B onwards on `main`.
