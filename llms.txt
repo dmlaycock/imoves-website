@@ -1,0 +1,52 @@
+# imoves
+
+> imoves is a UK platform of ready-to-use primary school PE, active learning, movement break (Active Blasts), dance, gymnastics and wellbeing resources, made so that non-specialist teachers can get children moving throughout the school day with less planning. AfPE Approved Curriculum Resource. 4,000+ lessons and activities. Used by UK primary schools for over 10 years. Published by imoves active education ltd, 109 Rustlings Road, Sheffield, S11 7AB. Phone +44 114 266 1061. Email kirsty@imoves.com.
+
+Teachers log in and use the resources at https://platform.imoves.com. Schools subscribe per product and per key stage; current prices are on the pricing page. A free 28-day trial is available at https://platform.imoves.com/sign-up.
+
+## Main pages
+
+- [Primary PE & Active Learning Resources for Schools](https://imoves.com/)
+- [Whole-School Physical Activity Resources for Primary Schools](https://imoves.com/active-school)
+- [Active Learning for Primary Schools - Maths, English, Science](https://imoves.com/active-learning)
+- [Brain Breaks & Movement Breaks for Primary Schools](https://imoves.com/active-blasts)
+- [Primary PE Planning and Lesson Resources](https://imoves.com/primary-pe)
+- [Primary Dance Scheme of Work & Lessons](https://imoves.com/dance)
+- [Gymnastics Planning & Resources for Primary Schools](https://imoves.com/imoves-gymnastics)
+- [Health and Mental Wellbeing Resources | Primary Schools](https://imoves.com/imoves-mental-wellbeing)
+- [PE & Physical Activity for Multi-Academy Trusts](https://imoves.com/mats)
+- [CPD Overview for Primary School Teachers](https://imoves.com/cpd-for-primary-school-teachers)
+- [Pricing](https://imoves.com/pricing)
+- [About imoves | Helping Primary Schools Get Children Moving](https://imoves.com/about-us)
+- [Our Team](https://imoves.com/team)
+- [Contact us](https://imoves.com/contact-us)
+- [Teacher Knowledge Hub | Teach Active](https://imoves.com/teacher-knowledge-hub)
+- [Resource Hub - Expert Guidance for Active, Engaged Schools](https://imoves.com/resource-hub)
+
+## Guides for teachers (Teacher Knowledge Hub and Resource Hub)
+
+- [Active Festive Brain Breaks for Primary Schools in December!](https://imoves.com/resource-hub/active-advent)
+- [Mental Health & Well-Being in Schools | Support for Teachers](https://imoves.com/resource-hub/mental-health-well-being)
+- [Should We Teach Children That Stress Isn’t a Mental Health Issue?](https://imoves.com/resource-hub/mental-health-well-being/teaching-children-stress-vs-mental-health)
+- [Policy and Funding Hub for Active Schools | Maximise Resources](https://imoves.com/resource-hub/policy-funding)
+- [A Brighter Financial Outlook for Schools – Changes in September](https://imoves.com/resource-hub/policy-funding/a-brighter-financial-outlook-for-schools-whats-changing-from-september)
+- [How to spend PE Sports Premium Funding Effectively 2025/26](https://imoves.com/resource-hub/policy-funding/pess-funding-active-schools)
+- [Free Primary PE & Dance Lesson Plans | KS1 & KS2 Teachers](https://imoves.com/resource-hub/primary-pe-and-dance-lesson-planning)
+- [Monster Mash Dance Lesson for Primary | Halloween PE Activity](https://imoves.com/resource-hub/primary-pe-and-dance-lesson-planning/monster-mash-primary-school-dance-lesson-plan)
+- [Planning The Perfect Sports Day](https://imoves.com/resource-hub/primary-pe-and-dance-lesson-planning/planning-the-perfect-sports-day)
+- [Teaching Primary School Dance Using 6 Principles of Dance](https://imoves.com/teacher-knowledge-hub/6-principles-of-dance)
+- [Ofsted Primary School PE Programme | Sports Day Ideas](https://imoves.com/teacher-knowledge-hub/choosing-an-ofsted-appropriate-pe-programme)
+- [5 Areas to Build an Active School - Guide for Teachers](https://imoves.com/teacher-knowledge-hub/creating-an-active-school)
+- [Building an Effective PE Curriculum for Primary Schools](https://imoves.com/teacher-knowledge-hub/how-do-i-build-my-pe-curriculum)
+- [3 Outdated Approaches to Physical Education](https://imoves.com/teacher-knowledge-hub/how-to-choose-the-right-pe-programme-for-your-primary-school)
+- [Primary PE Scheme of Work: A Guide for Schools](https://imoves.com/teacher-knowledge-hub/pe-scheme-of-work)
+- [Primary PE Planning: Create an Outstanding Curriculum with imoves](https://imoves.com/teacher-knowledge-hub/primary-pe-planning-guide)
+- [How Can I Find the Beat to the Music with Primary Children?](https://imoves.com/teacher-knowledge-hub/teaching-beat-and-phrase)
+- [The Ultimate Guide to Teaching Dance in Primary Schools](https://imoves.com/teacher-knowledge-hub/teaching-dance-in-primary-schools-guide)
+- [What to Look Out for in a Primary School PE Programme](https://imoves.com/teacher-knowledge-hub/what-should-i-look-for-in-a-pe-programme)
+
+## Optional
+
+- [Sitemap](https://imoves.com/sitemap.xml)
+- [Terms and conditions](https://imoves.com/terms-and-conditions)
+- [Privacy policy](https://imoves.com/privacy-policy)

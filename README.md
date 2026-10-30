@@ -30,3 +30,9 @@ Static copy of the public imoves.com marketing site, taken 29 October 2026 from 
 ## Version A - locked 30 Oct 2026
 
 Version A is the exact copy at v0.7 (commit f664269). It is locked on branch `version-a` and served frozen at `/version-a/`. Its specification is `tools/SPEC-version-a.md`. Do not change Version A; all further work is Version B onwards on `main`.
+
+## Version B - search and AI discovery (in progress from 30 Oct 2026)
+
+Version B starts from Version A and changes nothing a visitor sees. Every change is in the page head, in attributes, or in new files at the root. Verified against the frozen Version A copy: 322 of 322 renders pixel-identical, no text change.
+
+- v0.8 - 30 Oct 2026 - titles: doubled "| imoves | imoves" removed on 56 pages, 13 duplicates rewritten; descriptions: 16 written where missing, 85 over-length trimmed to a sentence, 10 duplicates rewritten; H1: 15 pages given one by retagging their banner heading, 19 pages with several reduced to one (extras become h2, classes kept), image-only h1s became divs; alt text on all 416 images that lacked it (114 marked decorative, 59 video thumbnails named from the page, 62 hand-written, rest from filenames); JSON-LD added: WebSite, BreadcrumbList on 131 pages, Article on 73 guides and blogs, FAQPage on 5 product pages (50 questions), Product and Offer for the 8 products on /pricing; robots.txt with AI crawlers allowed; llms.txt; sitemap.xml regenerated with 132 indexable URLs and lastmod. Scripts: tools/versionb-seo.py, versionb-schema.py, versionb-alt.py; change logs tools/versionb-changes.json, versionb-alt.json, versionb-schema.json.
