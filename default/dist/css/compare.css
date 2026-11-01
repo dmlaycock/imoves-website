@@ -18,7 +18,8 @@
 .cmp-table tr.price td{font-weight:700;font-size:1.1rem}
 .cmp-table tr.price th.f{font-size:.95rem}.cmp-table tr.price th.f small{display:block;font-weight:300;font-size:.8rem}
 .cmp-table tr.price.first td{border-top:2px solid #702f8a}
-.cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0}
+.cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0;vertical-align:top}
+.cmp-table .cmp-btn{display:flex;align-items:center;justify-content:center;min-height:50px;padding:4px 6px}
 .cmp-mobile{display:none}
 @media (max-width:767px){.cmp-desktop{display:none}.cmp-mobile{display:block}}
 /* cards */
@@ -33,6 +34,9 @@
 .cmp-features li:first-child{border-top:0}
 .cmp-features .cmp-ico{flex:none;width:16px;height:16px;margin-top:1px}
 .cmp-features .yes::before{width:4px;height:8px;left:5px;top:2px}
+.cmp-features .no::before,.cmp-features .no::after{width:2.5px;height:9px;left:6.75px;top:3.5px}
+.cmp-features li.cmp-not{color:rgba(0,0,0,.55)}
+.cmp-features li.cmp-grp{display:block;border-top:0;padding:12px 0 2px;font-weight:700;font-size:.78rem;letter-spacing:.03em;text-transform:uppercase;color:#702f8a}
 .cmp-foot{padding:10px 14px 16px}
 @media (min-width:600px){.cmp-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1024px){.cmp-grid{grid-template-columns:repeat(5,1fr)}}

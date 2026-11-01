@@ -82,7 +82,8 @@ CSS = """/* Version D v0.13: package comparison (matrix on /pricing, cards on th
 .cmp-table tr.price td{font-weight:700;font-size:1.1rem}
 .cmp-table tr.price th.f{font-size:.95rem}.cmp-table tr.price th.f small{display:block;font-weight:300;font-size:.8rem}
 .cmp-table tr.price.first td{border-top:2px solid #702f8a}
-.cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0}
+.cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0;vertical-align:top}
+.cmp-table .cmp-btn{display:flex;align-items:center;justify-content:center;min-height:50px;padding:4px 6px}
 .cmp-mobile{display:none}
 @media (max-width:767px){.cmp-desktop{display:none}.cmp-mobile{display:block}}
 /* cards */
@@ -97,6 +98,9 @@ CSS = """/* Version D v0.13: package comparison (matrix on /pricing, cards on th
 .cmp-features li:first-child{border-top:0}
 .cmp-features .cmp-ico{flex:none;width:16px;height:16px;margin-top:1px}
 .cmp-features .yes::before{width:4px;height:8px;left:5px;top:2px}
+.cmp-features .no::before,.cmp-features .no::after{width:2.5px;height:9px;left:6.75px;top:3.5px}
+.cmp-features li.cmp-not{color:rgba(0,0,0,.55)}
+.cmp-features li.cmp-grp{display:block;border-top:0;padding:12px 0 2px;font-weight:700;font-size:.78rem;letter-spacing:.03em;text-transform:uppercase;color:#702f8a}
 .cmp-foot{padding:10px 14px 16px}
 @media (min-width:600px){.cmp-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1024px){.cmp-grid{grid-template-columns:repeat(5,1fr)}}
@@ -119,19 +123,27 @@ def matrix():
     o.append(f'</tbody></table></div><p class="cmp-note">{VAT_NOTE}</p></div>')
     return ''.join(o)
 
-def cards(level, link=True):
+def cards(level, link=True, full=False):
+    """full=True: every feature with a tick or cross, grouped as in the matrix (phone view of /pricing)."""
     o = ['<div class="cmp"><div class="cmp-grid">']
     for k, name, bg, btn, pid, pr in PRODUCTS:
-        inc = [f for g, feats in GROUPS[1:] for f, s in feats if k in s]  # the common group is stated once below the cards
+        if full:
+            items = ''.join(f'<li class="cmp-grp">{esc(g)}</li>' + ''.join(f'<li class="{"" if k in s else "cmp-not"}">{ico(k in s)}{esc(f)}</li>' for f, s in feats) for g, feats in GROUPS)
+        else:
+            inc = [f for g, feats in GROUPS[1:] for f, s in feats if k in s]  # the common group is stated once below the cards
+            items = ''.join(f'<li>{ico(True)}{esc(f)}</li>' for f in inc)
         o.append(f'<div class="cmp-card" style="background:{bg}"><div class="cmp-head" role="heading" aria-level="{level}" style="background:{btn}">{esc(name)}</div>'
                  f'<div class="cmp-price"><small>from</small><b>£{pr[0]}</b><small>Infant £{pr[0]} · Junior £{pr[1]} · Primary £{pr[2]}</small></div>'
-                 f'<ul class="cmp-features" aria-label="What is included in {esc(name)}">' + ''.join(f'<li>{ico(True)}{esc(f)}</li>' for f in inc) +
+                 f'<ul class="cmp-features" aria-label="What is included in {esc(name)}">{items}'
                  f'</ul><div class="cmp-foot"><a class="cmp-btn" style="background:{btn}" href="{PLATFORM}{pid}">Get {esc(name)}</a></div></div>')
     def lc(f): return f if f.startswith('Online') else f[0].lower() + f[1:]
     common = [('the ' + f if f == 'Online Curriculum Planner' else lc(f)) for f, s in GROUPS[0][1]]
     common[-1] = 'a ' + common[-1] if common[-1].startswith('28-day') else common[-1]
     common_txt = ', '.join(common[:-1]) + ' and ' + common[-1]
-    o.append(f'</div><p class="cmp-note" style="margin-top:22px;font-weight:400">Every package includes {esc(common_txt)}.</p>')
+    if not full:
+        o.append(f'</div><p class="cmp-note" style="margin-top:22px;font-weight:400">Every package includes {esc(common_txt)}.</p>')
+    else:
+        o.append('</div>')
     more = ' <a href="./pricing/" style="color:#702f8a;font-weight:700">Compare everything that is included</a>' if link else ''
     o.append(f'<p class="cmp-note" style="margin-top:8px">{VAT_NOTE}{more}</p></div>')
     return ''.join(o)
@@ -156,9 +168,11 @@ open(f, 'w', encoding='utf-8').write(str(soup))
 
 # --- pricing page: matrix (replaces the v0.12 component; the v0.12 H1 and notes stay) ---
 f = os.path.join(ROOT, 'pricing/index.html'); soup = BeautifulSoup(open(f, encoding='utf-8'), 'html.parser')
-old = soup.select_one('.cmp'); assert old is not None, 'pricing comparison block not found'
+old = soup.select_one('.cmp-desktop') or soup.select_one('.cmp'); assert old is not None, 'pricing comparison block not found'
+mob = soup.select_one('.cmp-mobile')
+if mob is not None: mob.decompose()  # v0.13+ layout: desktop and mobile blocks are regenerated together
 # matrix for desktop and tablet; the card view (same data) for phones, where a six-column table cannot fit
-old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=2, link=False) + '</div>', 'html.parser'))
+old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=2, link=False, full=True) + '</div>', 'html.parser'))
 add_css(soup, '../default/dist/css/compare.css')
 # Product schema: keep prices and checkout links in step with the data
 by_name = {name: (pid, pr) for k, name, bg, btn, pid, pr in PRODUCTS}
