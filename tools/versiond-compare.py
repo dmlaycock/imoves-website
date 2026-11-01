@@ -61,6 +61,7 @@ GROUPS = [
 ]
 TIERS = [('Infant school', 'EYFS and KS1'), ('Junior school', 'KS2'), ('Primary school', 'EYFS, KS1 and KS2')]
 VAT_NOTE = 'Prices are per school per year, plus VAT.'
+DISCOUNT = '<p class="cmp-note" style="margin-top:10px">Get <b style=\"font-weight:700\">30% discount</b> if your school is small<br>Message <a href="mailto:kirsty@imoves.com" style="color:#702f8a">kirsty@imoves.com</a> for your unique discount code</p>'
 
 CSS = """/* Version D v0.13: package comparison (matrix on /pricing, cards on the homepage) */
 .cmp{max-width:1140px;margin:0 auto;text-align:left;color:#000}
@@ -120,7 +121,7 @@ def matrix():
     for i, (t, ks) in enumerate(TIERS):
         o.append(f'<tr class="price{" first" if i == 0 else ""}"><th scope="row" class="f">{t}<small>{ks}</small></th>' + ''.join(f'<td style="background:{bg}66">£{pr[i]}</td>' for k, name, bg, btn, pid, pr in PRODUCTS) + '</tr>')
     o.append('<tr class="buy"><td class="f"></td>' + ''.join(f'<td style="background:{bg}66"><a class="cmp-btn" style="background:{btn}" href="{PLATFORM}{pid}">Get {esc(name)}</a></td>' for k, name, bg, btn, pid, pr in PRODUCTS) + '</tr>')
-    o.append(f'</tbody></table></div><p class="cmp-note">{VAT_NOTE}</p></div>')
+    o.append(f'</tbody></table></div><p class="cmp-note">{VAT_NOTE}</p>{DISCOUNT}</div>')
     return ''.join(o)
 
 def cards(level, link=True, full=False):
@@ -145,7 +146,7 @@ def cards(level, link=True, full=False):
     else:
         o.append('</div>')
     more = ' <a href="./pricing/" style="color:#702f8a;font-weight:700">Compare everything that is included</a>' if link else ''
-    o.append(f'<p class="cmp-note" style="margin-top:8px">{VAT_NOTE}{more}</p></div>')
+    o.append(f'<p class="cmp-note" style="margin-top:8px">{VAT_NOTE}{more}</p>{DISCOUNT}</div>')
     return ''.join(o)
 
 def add_css(soup, href):
@@ -187,6 +188,8 @@ if mob is not None: mob.decompose()  # v0.13+ layout: desktop and mobile blocks 
 # matrix for desktop and tablet; the card view (same data) for phones, where a six-column table cannot fit
 old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=2, link=False, full=True) + '</div>', 'html.parser'))
 add_css(soup, '../default/dist/css/compare.css')
+notes = soup.select('p.pr-note')
+if len(notes) > 1: notes[-1].decompose()
 # Product schema: keep prices and checkout links in step with the data
 by_name = {name: (pid, pr) for k, name, bg, btn, pid, pr in PRODUCTS}
 for sc in soup.find_all('script', attrs={'type': 'application/ld+json'}):
