@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Version D: the package comparison, generated from one data block for two pages.
+"""Version D: the package comparison, generated from one data block for two pages (identical from v0.15).
 
 v0.12 introduced one component on both pages (two families of cards). v0.13 replaces it, after
 David's review, with:
@@ -156,14 +156,27 @@ def add_css(soup, href):
 os.makedirs(os.path.join(ROOT, 'default/dist/css'), exist_ok=True)
 open(os.path.join(ROOT, 'default/dist/css/compare.css'), 'w').write(CSS)
 
-# --- homepage: cards (replaces the v0.12 component or the original PNG) ---
+# --- homepage: the same matrix and phone cards as /pricing (v0.15), replacing the v0.13 compact cards ---
+PAGES = {'blasts': './active-blasts', 'learning': './active-learning', 'dance': './dance', 'pe': './primary-pe', 'school': './active-school'}
 f = os.path.join(ROOT, 'index.html'); soup = BeautifulSoup(open(f, encoding='utf-8'), 'html.parser')
-old = soup.select_one('.cmp')
+old = soup.select_one('.cmp-desktop') or soup.select_one('.cmp')
 if old is None:
     src = soup.find('source', srcset=re.compile('subscription-image')); old = src.parent if src else None
 assert old is not None, 'homepage comparison block not found'
-old.replace_with(BeautifulSoup(cards(level=4), 'html.parser'))
+mob = soup.select_one('.cmp-mobile')
+if mob is not None: mob.decompose()
+old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=4, link=False, full=True) + '</div>', 'html.parser'))
 add_css(soup, './default/dist/css/compare.css')
+# the row of five product pill buttons: same order as the table
+pills = [a for a in soup.find_all('a', class_='rounded-full') if a.get('href') in PAGES.values()]
+if pills:
+    wrappers = [a.parent for a in pills]; row = wrappers[0].parent
+    order = [PAGES[k] for k, *_ in PRODUCTS]
+    wrappers.sort(key=lambda w: order.index(w.find('a')['href']))
+    anchor = wrappers[0]
+    first_pos = min(row.index(w) for w in [a.parent for a in pills])
+    for w in wrappers: w.extract()
+    for i, w in enumerate(wrappers): row.insert(first_pos + i, w)
 open(f, 'w', encoding='utf-8').write(str(soup))
 
 # --- pricing page: matrix (replaces the v0.12 component; the v0.12 H1 and notes stay) ---
