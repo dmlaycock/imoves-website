@@ -1,0 +1,14 @@
+/* Version C: Cloudflare Stream player (replaces Wistia popover embeds) */
+.cf-video{position:relative;padding-top:56.25%;width:100%}
+.cf-video-thumb{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;margin:0;background:#1c1c1c;border-radius:17.5px;overflow:hidden;cursor:pointer;display:block}
+.cf-video-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cf-video-play{position:absolute;left:50%;top:50%;width:22.7%;max-width:127px;aspect-ratio:127/81;transform:translate(-50%,-50%);background:rgba(112,47,138,.76);border-radius:13.125px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cf-video-thumb:hover .cf-video-play,.cf-video-thumb:focus-visible .cf-video-play{background:rgba(112,47,138,1)}
+.cf-video-play::after{content:"";display:block;width:0;height:0;border-style:solid;border-width:16px 0 16px 28px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.cf-video-thumb:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+.cf-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .2s}
+.cf-lightbox.is-open{opacity:1}
+.cf-lightbox-inner{position:relative;width:min(1100px,100%);aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cf-lightbox-inner iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cf-lightbox-close{position:absolute;top:-40px;right:0;width:36px;height:36px;border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer}
+@media (max-width:640px){.cf-lightbox{padding:12px}.cf-lightbox-close{top:-38px}}

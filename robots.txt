@@ -3,6 +3,7 @@ Allow: /
 Disallow: /adm
 Disallow: /version-a/
 Disallow: /version-b/
+Disallow: /version-c/
 
 # AI and answer-engine crawlers are welcome
 User-agent: GPTBot
