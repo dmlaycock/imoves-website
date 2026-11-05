@@ -24,6 +24,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history, so each sitemap entry gets the date its page last changed
 
       - name: Build upload folder (live site only, _redirects, size checks)
         run: python3 tools/build-dist.py dist
