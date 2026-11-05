@@ -59,6 +59,8 @@ GROUPS = [
         ('Mental Wellbeing Programme', {'school'}),
     ]),
 ]
+# product pages, linked from the column headings and card headings (v0.21)
+SLUG = {'blasts': 'active-blasts', 'learning': 'active-learning', 'dance': 'dance', 'pe': 'primary-pe', 'school': 'active-school'}
 TIERS = [('Infant school', 'EYFS and KS1'), ('Junior school', 'KS2'), ('Primary school', 'EYFS, KS1 and KS2')]
 VAT_NOTE = 'Prices are per school per year, plus VAT.'
 DISCOUNT = '<p class="cmp-note" style="margin-top:10px">Get <b style=\"font-weight:700\">30% discount</b> if your school is small<br>Message <a href="mailto:kirsty@imoves.com" style="color:#702f8a">kirsty@imoves.com</a> for your unique discount code</p>'
@@ -86,6 +88,8 @@ CSS = """/* Version D v0.13: package comparison (matrix on /pricing, cards on th
 .cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0;vertical-align:top}
 .cmp-table .cmp-btn{display:flex;align-items:center;justify-content:center;min-height:50px;padding:4px 6px}
 .cmp-mobile{display:none}
+.cmp-hl{color:#fff;text-decoration:none;display:block}.cmp-hl::after{content:" \\203A";font-weight:400;opacity:.8}
+.cmp-hl:hover,.cmp-hl:focus{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.cmp-desktop{display:none}.cmp-mobile{display:block}}
 /* cards */
 .cmp-grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -110,9 +114,11 @@ CSS = """/* Version D v0.13: package comparison (matrix on /pricing, cards on th
 def esc(s): return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 def ico(yes): return f'<span class="cmp-ico {"yes" if yes else "no"}" aria-hidden="true"></span><span style="position:absolute;left:-9999px">{"Included" if yes else "Not included"}</span>'
 
-def matrix():
+def hlink(k, name, base): return f'<a class="cmp-hl" href="{base}{SLUG[k]}/">{esc(name)}</a>'
+
+def matrix(base):
     o = ['<div class="cmp"><div class="cmp-scroll"><table class="cmp-table"><caption style="position:absolute;left:-9999px">What each imoves package includes, with prices</caption><thead><tr><th class="f" scope="col"><span style="position:absolute;left:-9999px">Feature</span></th>']
-    o += [f'<th scope="col" style="background:{btn}">{esc(name)}</th>' for k, name, bg, btn, pid, pr in PRODUCTS]
+    o += [f'<th scope="col" style="background:{btn}">{hlink(k, name, base)}</th>' for k, name, bg, btn, pid, pr in PRODUCTS]
     o.append('</tr></thead><tbody>')
     for g, feats in GROUPS:
         o.append(f'<tr class="grp"><td colspan="{len(PRODUCTS)+1}">{esc(g)}</td></tr>')
@@ -124,7 +130,7 @@ def matrix():
     o.append(f'</tbody></table></div><p class="cmp-note">{VAT_NOTE}</p>{DISCOUNT}</div>')
     return ''.join(o)
 
-def cards(level, link=True, full=False):
+def cards(level, base, link=True, full=False):
     """full=True: every feature with a tick or cross, grouped as in the matrix (phone view of /pricing)."""
     o = ['<div class="cmp"><div class="cmp-grid">']
     for k, name, bg, btn, pid, pr in PRODUCTS:
@@ -133,7 +139,7 @@ def cards(level, link=True, full=False):
         else:
             inc = [f for g, feats in GROUPS[1:] for f, s in feats if k in s]  # the common group is stated once below the cards
             items = ''.join(f'<li>{ico(True)}{esc(f)}</li>' for f in inc)
-        o.append(f'<div class="cmp-card" style="background:{bg}"><div class="cmp-head" role="heading" aria-level="{level}" style="background:{btn}">{esc(name)}</div>'
+        o.append(f'<div class="cmp-card" style="background:{bg}"><div class="cmp-head" role="heading" aria-level="{level}" style="background:{btn}">{hlink(k, name, base)}</div>'
                  f'<div class="cmp-price"><small>from</small><b>£{pr[0]}</b><small>Infant £{pr[0]} · Junior £{pr[1]} · Primary £{pr[2]}</small></div>'
                  f'<ul class="cmp-features" aria-label="What is included in {esc(name)}">{items}'
                  f'</ul><div class="cmp-foot"><a class="cmp-btn" style="background:{btn}" href="{PLATFORM}{pid}">Get {esc(name)}</a></div></div>')
@@ -166,7 +172,7 @@ if old is None:
 assert old is not None, 'homepage comparison block not found'
 mob = soup.select_one('.cmp-mobile')
 if mob is not None: mob.decompose()
-old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=4, link=False, full=True) + '</div>', 'html.parser'))
+old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix('./') + '</div><div class="cmp-mobile">' + cards(level=4, base='./', link=False, full=True) + '</div>', 'html.parser'))
 add_css(soup, './default/dist/css/compare.css')
 # the row of five product pill buttons: same order as the table
 pills = [a for a in soup.find_all('a', class_='rounded-full') if a.get('href') in PAGES.values()]
@@ -186,7 +192,7 @@ old = soup.select_one('.cmp-desktop') or soup.select_one('.cmp'); assert old is 
 mob = soup.select_one('.cmp-mobile')
 if mob is not None: mob.decompose()  # v0.13+ layout: desktop and mobile blocks are regenerated together
 # matrix for desktop and tablet; the card view (same data) for phones, where a six-column table cannot fit
-old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix() + '</div><div class="cmp-mobile">' + cards(level=2, link=False, full=True) + '</div>', 'html.parser'))
+old.replace_with(BeautifulSoup('<div class="cmp-desktop">' + matrix('../') + '</div><div class="cmp-mobile">' + cards(level=2, base='../', link=False, full=True) + '</div>', 'html.parser'))
 add_css(soup, '../default/dist/css/compare.css')
 notes = soup.select('p.pr-note')
 if len(notes) > 1: notes[-1].decompose()

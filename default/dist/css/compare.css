@@ -21,6 +21,8 @@
 .cmp-table tr.buy td{padding:12px 6px 16px;border-bottom:0;vertical-align:top}
 .cmp-table .cmp-btn{display:flex;align-items:center;justify-content:center;min-height:50px;padding:4px 6px}
 .cmp-mobile{display:none}
+.cmp-hl{color:#fff;text-decoration:none;display:block}.cmp-hl::after{content:" \203A";font-weight:400;opacity:.8}
+.cmp-hl:hover,.cmp-hl:focus{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.cmp-desktop{display:none}.cmp-mobile{display:block}}
 /* cards */
 .cmp-grid{display:grid;grid-template-columns:1fr;gap:12px}
